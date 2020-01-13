@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  soccerdet:
+    build: .
+    container_name: soccerdet
+    command: runserver soccerdet:8000
+    ports:
+    - "8000:8000"
+    environment:
+      SOCCERDET_DB: postgres://postgres:postgres@postgres/postgres
+    depends_on:
+    - postgres
+
+  postgres:
+    image: postgres
+    container_name: soccerdet_postgres
+    volumes:
+      - ${POSTGRES_DIR:-.env/data}/postgres:/var/lib/postgresql/data

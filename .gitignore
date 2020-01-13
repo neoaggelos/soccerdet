@@ -1,0 +1,11 @@
+.venv
+venv
+
+**.sqlite3
+**.egg-info
+build
+dist
+
+**/__pycache__
+
+.vscode

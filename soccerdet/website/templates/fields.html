@@ -1,0 +1,20 @@
+{% extends "template.html" %}
+
+{% block title-text %}Τα Γηπεδα σας{% endblock %}
+{% block subtitle-text %}Τα μερη στα οποια εχετε ξεδιπλωσει το υπερτατο ταλεντο σας, τα χορταρια στα οποια εχετε ξεχυθει σαν εμετος{% endblock %}
+
+{% block content %}
+    {% for field in all_fields %}
+        <div class="p-5">
+            <div class="row">
+                <div class="col-md-6 {% cycle 'order-last' 'order-first' %}">
+                    <h1 class="display-3 {% cycle 'text-right' 'text-left' %}">{{ field.name }}</h1>
+                    <p class="lead {% cycle 'text-right' 'text-left' %}">{{ field.description }}</p>
+                </div>
+                <div class="col-md-6">
+                    <img class="img-fluid" src="{{ field.image_url }}" />
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

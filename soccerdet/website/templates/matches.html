@@ -1,0 +1,53 @@
+{% extends "template.html" %}
+
+
+{% block title-text %}Τα παιχνίδια σας{% endblock %}
+{% block subtitle-text %}Αναπολείστε στιγμές που καταστρέψατε αντιπάλους και ζωγραφίσατε στο γήπεδο. Ξεχάστε τις υπόλοιπες!{% endblock %}
+
+{% block content %}
+
+<div id="accordion">
+
+    {% for count, match in all_matches %}
+
+        <div class="card border-dark mb-3">
+            <div id="match-{{ match.id }}" class="card-header text-center">
+                <div class="row text-center">
+                    <div class="btn col-sm-2">
+                        {{ match.date }}
+                    </div>
+                    <div class="btn col-sm-9 text-center {{ match.team_a_attrs }}">
+                        <p class="lead">
+                            <span class="{{ match.team_a_attrs }}">{{match.team_a.name}} {{match.team_a.score}}</span>
+                            <span class="font-weight-bold px-2">-</span>
+                            <span class="{{ match.team_b_attrs }}">{{match.team_b.score}} {{match.team_b.name}}</span>
+                        </p>
+                    </div>
+                    <div class="col-sm-1">
+                        <button id="btn-{{ match.id }}" class="text-primary btn rounded border border-primary p-2 collapsed" data-toggle="collapse" data-target="#collapse-match-{{ match.id }}" aria-expanded="true" aria-controls="collapse-match-{{ match.id }}">Info</button>
+                    </div>
+                </div>
+            </div>
+            <div class="{% if count == 0 %}show {% endif %}collapse" id="collapse-match-{{ match.id }}" aria-labelledby="match-{{ match.id }}" data-parent="#accordion">
+                <div class="card-body text-dark">
+                    <div class="h4 text-center">Γηπεδο: {{ match.stadium.name }}</div>
+                    <table class="table text-center table-striped">
+                        <thead class="thead font-weight-bold">
+                            <td>{{ match.team_a.name }}</td>
+                            <td>{{ match.team_b.name }}</td>
+                        </thead>
+                        {% for team_a_player, team_b_player in match.all_players %}
+                            <tr>
+                                <td class="{{ match.team_a_attrs }}">{{ team_a_player }}</td>
+                                <td class="{{ match.team_b_attrs }}">{{ team_b_player }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+</div>
+
+{% endblock %}

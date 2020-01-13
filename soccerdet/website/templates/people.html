@@ -1,0 +1,31 @@
+{% extends "template.html" %}
+
+{% block title-text %}Οι φιλοι σας{% endblock %}
+{% block subtitle-text %}Υγιής μίξη παλαιμαχων με πολυετη εμπειρια <del>στις μπυραριες</del> στα γηπεδα, και νεων με ταλεντο <del>και χιουμορ</del>{% endblock %}
+
+{% block content %}
+
+<div class="card-columns pt-4">
+    {% for person in all_people %}
+
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title text-primary">{{ person.full_name }}</h4>
+            </div>
+            <div class="card-body">
+                <div class="card-text">
+                    <p class="lead">{{ person.description }}</p>
+                    <blockquote class="blockquote">
+                        <p class="mb-0"><em>"{{ person.quote }}"</em></p>
+                        <footer class="blockquote-footer">{{ person.name }}</footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+</div>
+
+</div>
+
+{% endblock %}
